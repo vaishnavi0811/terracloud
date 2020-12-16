@@ -20,6 +20,7 @@ pipeline{
                     dir('terraform') {
                         sh "echo \$(pwd)"
                         sh "ls -lrt"
+                        sh "cat tfsec_test.xml"
                         junit checksName: 'Terraform security checks', testResults: "tfsec_test.xml"
                     }
                 }
