@@ -7,11 +7,12 @@ pipeline{
     stages{
         stage("Test Terraform files"){
             steps{
-                container('docker'){
+                container('ubuntu'){
                     echo "========Executing Test case for Terraform files======="
+                    sh "apt install linuxbrew-wrapper"
                     dir('terraform') {
                         sh "echo \$(pwd)"
-                        sh "docker run --rm  -v \"\$(pwd):/terraform\" liamg/tfsec -f junit /terraform > tfsec_test.xml"
+                        sh "docker run --rm  -v \"\$(pwd):/src\" liamg/tfsec -f junit /src > tfsec_test.xml"
                     }
                 }  
             }
