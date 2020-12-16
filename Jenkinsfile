@@ -15,7 +15,7 @@ pipeline{
             post{
                 always{
                     echo "========always========"
-                    sh "echo $(pwd)"
+                    sh "echo \$(pwd)"
                     junit checksName: 'Terraform security checks', testResults: "terraform/tfsec_test.xml"
                 }
                 success{
