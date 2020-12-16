@@ -7,12 +7,11 @@ pipeline{
     stages{
         stage("Test Terraform files"){
             steps{
-                container('ubuntu'){
+                container('tfsec'){
                     echo "========Executing Test case for Terraform files======="
-                    sh "apt install linuxbrew-wrapper"
                     dir('terraform') {
                         sh "echo \$(pwd)"
-                        sh "docker run --rm  -v \"\$(pwd):/src\" liamg/tfsec -f junit /src > tfsec_test.xml"
+                        sh "tfsec -f junit > tfsec_test.xml"
                     }
                 }  
             }
@@ -33,17 +32,6 @@ pipeline{
                     echo "========A execution failed========"
                 }
             }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
