@@ -10,16 +10,18 @@ pipeline{
                 container('docker'){
                     echo "========Executing Test cae for Terraform files======="
                     dir('terraform') {
-                        sh "docker run --rm  -v \"\$(pwd):/terraform\" liamg/tfsec -f junit terraform  > tfsec_test.xml"
+                        sh "docker run --rm  -v \"\$(pwd):/terraform\" liamg/tfsec -f junit terraform > tfsec_test.xml"
                     }
                 }  
             }
             post{
                 always{
                     echo "========always========"
-                    sh "echo \$(pwd)"
-                    sh "ls -lrt"
-                    junit checksName: 'Terraform security checks', testResults: "tfsec_test.xml"
+                    dir('terraform') {
+                        sh "echo \$(pwd)"
+                        sh "ls -lrt"
+                        junit checksName: 'Terraform security checks', testResults: "tfsec_test.xml"
+                    }
                 }
                 success{
                     echo "========A executed successfully========"
