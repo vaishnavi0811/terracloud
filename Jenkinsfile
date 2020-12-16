@@ -7,9 +7,11 @@ pipeline{
     stages{
         stage("Test Terraform files"){
             steps{
-                echo "========Executing Test cae for Terraform files======="
-                dir('terraform') {
-                   sh "docker run --rm -it -v \"\$(pwd):/terraform\" liamg/tfsec -f junit terraform  > tfsec_test.xml"
+                container('docker'){
+                    echo "========Executing Test cae for Terraform files======="
+                    dir('terraform') {
+                        sh "docker run --rm -it -v \"\$(pwd):/terraform\" liamg/tfsec -f junit terraform  > tfsec_test.xml"
+                    }
                 }  
             }
             post{
