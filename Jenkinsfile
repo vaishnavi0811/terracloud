@@ -18,7 +18,8 @@ pipeline{
                 always{
                     echo "========always========"
                     sh "echo \$(pwd)"
-                    junit checksName: 'Terraform security checks', testResults: "terraform/tfsec_test.xml"
+                    sh "ls -lrt"
+                    junit checksName: 'Terraform security checks', testResults: "tfsec_test.xml"
                 }
                 success{
                     echo "========A executed successfully========"
