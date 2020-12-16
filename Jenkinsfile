@@ -10,6 +10,7 @@ pipeline{
                 container('docker'){
                     echo "========Executing Test cae for Terraform files======="
                     dir('terraform') {
+                        sh "echo $(pwd)"
                         sh "docker run --rm  -v \"\$(pwd):/terraform\" liamg/tfsec -f junit /terraform > tfsec_test.xml"
                     }
                 }  
