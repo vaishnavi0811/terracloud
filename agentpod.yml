@@ -3,17 +3,10 @@ metadata:
     agent: jenkinsagent
 spec:
   containers:
-  - name: ubuntu
-    image: ubuntu:latest
-    command: ["tail", "-f", "/dev/null"]
-    imagePullPolicy: Always
   - name: jnlp
     env:
     - name: CONTAINER_ENV_VAR
       value: jnlp
-  - name: golang
-    image: golang:1.14-alpine
-    command: ["tail", "-f", "/dev/null"]
   - name: docker
     image: docker:18.06.1
     command: ["tail", "-f", "/dev/null"]
