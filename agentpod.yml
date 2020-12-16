@@ -2,13 +2,15 @@ metadata:
   labels:
     agent: jenkinsagent
 spec:
+  imagePullSecrets:
+    - name: nginx-image
   containers:
   - name: jnlp
     env:
     - name: CONTAINER_ENV_VAR
       value: jnlp
-  - name: docker
-    image: docker:18.06.1
+  - name: tfsec
+    image: contentapp.azurecr.io/brewtfsec:0
     command: ["tail", "-f", "/dev/null"]
     imagePullPolicy: Always
     volumeMounts:
