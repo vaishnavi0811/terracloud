@@ -37,7 +37,7 @@ pipeline{
                     sh "git checkout main"
                     sh "git merge developer"
                     withCredentials([usernamePassword(credentialsId: 'terraformrepo', passwordVariable: 'git_password', usernameVariable: 'git_user')]){
-                        sh "git push http://eyctp@dev.azure.com/eyctp/terracloud/_git/iaas"
+                        sh "git push http://$git_user:$git_passwordeyctp@dev.azure.com/eyctp/terracloud/_git/iaas"
                         sh "git tag $BUILD_NUMBER"
                     }
                 }
