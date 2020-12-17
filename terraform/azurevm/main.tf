@@ -23,7 +23,6 @@ variable "vm_sku" {
 }
 variable "admin_password" {
   type = string
-  default = "Password@2020"
 }
 variable "vm_size" {
   type = string
